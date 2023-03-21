@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1rem;
+    font-size: 1.6rem;
+}
+
+.each-user {
+    background-color: #00a690;
+    border-radius: 11px;
+    padding: 1rem;
+}

@@ -1,0 +1,7 @@
+<div class="container">
+    <div class="each-user" *ngFor="let user of users;" (click)="userClicked(user)">
+        <img [src]="user.imageUrl" alt="user picture">
+        <p> {{ user.name}} {{ user.lastName }}</p>
+        <p>{{ user.title }}</p>
+    </div>
+</div>

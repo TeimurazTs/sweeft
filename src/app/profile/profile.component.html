@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="main-profile">
+        <div class="each-user">
+            <img [src]="profile.imageUrl" alt="user picture">
+            <div class="user-text">
+                <p> {{ profile.name}} {{ profile.lastName }}</p>
+                <p>{{ profile.title }}</p>
+            </div>
+        </div>
+        <div class="friends-profile">
+            <div class="each-friend" *ngFor="let profile of profiles" (click)="userCliked(profile)">
+                <img [src]="profile.imageUrl" alt="user picture">
+                <p> {{ profile.name}} {{ profile.lastName }}</p>
+                <p>{{ profile.title }}</p>
+            </div>
+        </div>
+    </div>
+</div>
