@@ -1,6 +1,8 @@
 import { Component, OnInit, HostListener, DoCheck } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { User } from '../shared/user.module';
+import { fullProfile } from '../shared/fullProfile.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -9,36 +11,43 @@ import { User } from '../shared/user.module';
 })
 export class ProfileComponent implements OnInit {
   constructor(
-    private userService: UsersService
+    private userService: UsersService,
+    private route: ActivatedRoute
   ) { }
 
   profiles: User[] = [];
-  profile!: User;
+  fullProfile!: fullProfile;
+
+  userId = this.route.snapshot.paramMap.get('id') as string;
 
   ngOnInit() {
-    this.profile = this.userService.profile
-    this.fetchFriends(this.userService.profile)
+    this.route.params.subscribe(
+      params => {
+        this.userId = params['id']
+      }
+    )
+    this.fetchUserProfile(this.userId)
+    this.fetchFriends(this.userId)
   }
 
-  fetchFriends(userProfile: User) {
-    this.userService.fetchFriends(userProfile).subscribe(
+  fetchFriends(userId: string) {
+    this.userService.fetchFriends(userId).subscribe(
       (data) => {
         this.profiles = [...this.profiles, ...data.list]
       }
     )
   }
 
-  userCliked(user: User) {
-    this.userService.profile = user;
+  userCliked(usedId: string) {
     this.profiles = [];
-    this.fetchUserProfile(user);
-    this.fetchFriends(user);
+    this.fetchUserProfile(usedId);
+    this.fetchFriends(usedId);
   }
 
-  fetchUserProfile(userProfile: User) { 
-    this.userService.fetchUserProfile(userProfile).subscribe(
+  fetchUserProfile(userId: string) {
+    this.userService.fetchUserProfile(userId).subscribe(
       (data) => {
-        this.profile = data;
+        this.fullProfile = data;
       }
     )
   }
@@ -53,7 +62,7 @@ export class ProfileComponent implements OnInit {
 
     if (windowBottom + 1 >= docHeight) {
       this.userService.friendsPage++;
-      this.fetchFriends(this.userService.profile)
+      this.fetchFriends(this.userId)
     }
   }
 }

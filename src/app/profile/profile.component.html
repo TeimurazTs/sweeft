@@ -1,14 +1,18 @@
 <div class="container">
     <div class="main-profile">
         <div class="each-user">
-            <img [src]="profile.imageUrl" alt="user picture">
+            <img [src]="fullProfile.imageUrl" alt="user picture">
             <div class="user-text">
-                <p> {{ profile.name}} {{ profile.lastName }}</p>
-                <p>{{ profile.title }}</p>
+                <p> {{ fullProfile.name}} {{ fullProfile.lastName }}</p>
+                <p>{{ fullProfile.title }}</p>
+                <p>Lives at {{ fullProfile.address.country }} {{ fullProfile.address.streetAdress }}</p>
+                <p>Works at {{ fullProfile.company.name }} {{ fullProfile.company.suffix }}</p>
+                <p>Corporate Email: {{ fullProfile.email }}</p>
             </div>
         </div>
         <div class="friends-profile">
-            <div class="each-friend" *ngFor="let profile of profiles" (click)="userCliked(profile)">
+            <div class="each-friend" *ngFor="let profile of profiles" [routerLink]="['/profile', profile.id]"
+                (click)="userCliked(profile.id)">
                 <img [src]="profile.imageUrl" alt="user picture">
                 <p> {{ profile.name}} {{ profile.lastName }}</p>
                 <p>{{ profile.title }}</p>

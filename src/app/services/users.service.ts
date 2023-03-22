@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { ResponseData } from '../shared/responseData.module';
-import { User } from '../shared/user.module';
+import { fullProfile } from '../shared/fullProfile.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,6 @@ export class UsersService {
   friendsPage = 1;
   itemsPerPage = 20;
 
-  profile!: User;
-
   constructor(
     private http: HttpClient
   ) { }
@@ -24,11 +22,11 @@ export class UsersService {
     return this.http.get<ResponseData>(`${this.apiUrl}${this.page}/${this.itemsPerPage}`);
   }
 
-  fetchFriends(userProfile: User) {
-    return this.http.get<ResponseData>(`${this.apiUrl}${userProfile.id}/friends/${this.friendsPage}/${this.itemsPerPage}`);
+  fetchFriends(userId: string) {
+    return this.http.get<ResponseData>(`${this.apiUrl}${userId}/friends/${this.friendsPage}/${this.itemsPerPage}`);
   }
 
-  fetchUserProfile(userProfile: User) {
-    return this.http.get<User>(`${this.apiUrl}${userProfile.id}`);
+  fetchUserProfile(userId: string) {
+    return this.http.get<fullProfile>(`${this.apiUrl}${userId}`);
   }
 }

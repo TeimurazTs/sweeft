@@ -29,11 +29,6 @@ export class FeedComponent {
     )
   }
 
-  userClicked($event: User) {
-    this.userService.profile = $event
-    this.router.navigateByUrl('profile')
-  }
-
   @HostListener('window:scroll', ['$event'])
   onScroll(event: ElementRef) {
     const windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
