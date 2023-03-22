@@ -1,13 +1,15 @@
 <div class="container">
     <div class="main-profile">
-        <div class="each-user">
-            <img [src]="fullProfile.imageUrl" alt="user picture">
-            <div class="user-text">
-                <p> {{ fullProfile.name}} {{ fullProfile.lastName }}</p>
-                <p>{{ fullProfile.title }}</p>
-                <p>Lives at {{ fullProfile.address.country }} {{ fullProfile.address.streetAdress }}</p>
-                <p>Works at {{ fullProfile.company.name }} {{ fullProfile.company.suffix }}</p>
-                <p>Corporate Email: {{ fullProfile.email }}</p>
+        <div class="each-user" *ngIf="fullProfile">
+            <div class="each-user">
+                <img [src]="fullProfile.imageUrl" alt="user picture">
+                <div class="user-text">
+                    <p> {{ fullProfile.name}} {{ fullProfile.lastName }}</p>
+                    <p>{{ fullProfile.title }}</p>
+                    <p>Lives at {{ fullProfile.address.country }} {{ fullProfile.address.streetAdress }}</p>
+                    <p>Works at {{ fullProfile.company.name }} {{ fullProfile.company.suffix }}</p>
+                    <p>Corporate Email: {{ fullProfile.email }}</p>
+                </div>
             </div>
         </div>
         <div class="friends-profile">

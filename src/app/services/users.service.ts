@@ -12,7 +12,7 @@ export class UsersService {
 
   page = 1;
   friendsPage = 1;
-  itemsPerPage = 20;
+  itemsPerPage = 40;
 
   constructor(
     private http: HttpClient
