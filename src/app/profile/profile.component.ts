@@ -54,13 +54,9 @@ export class ProfileComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
-    const windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
-    const body = document.body;
-    const html = document.documentElement;
-    const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-    const windowBottom = windowHeight + window.pageYOffset;
+    const isScrolledToBottom = (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight;
 
-    if (windowBottom + 1 >= docHeight) {
+    if (isScrolledToBottom) {
       this.userService.friendsPage++;
       this.fetchFriends(this.userId)
     }
